@@ -1,5 +1,6 @@
 package edu.pwr.jakubwiraszka.moviesdisplay.utils
 
+import android.net.Uri
 import edu.pwr.jakubwiraszka.moviesdisplay.R
 
 val mcGregor = Pair("Obi-Wan Kenobi", "Ewan McGregor")
@@ -9,7 +10,6 @@ val christensen = Pair("Anakin Skywalker", "Hayden Christensen")
 val portman = Pair("Padmé Amidala", "Natalie Portman")
 val mcDiarmid = Pair("Chancellor Palpatine", "Ian McDiarmid")
 val knightley = Pair("Sabé", "Keira Knightley")
-val quiGon = Pair("Qui-Gon Jinn", "Liam Neeson")
 val morrison = Pair("Jango Fett", "Temuera Morrison")
 val byrne = Pair("Dormé", "Rose Byrne")
 val lee = Pair("Count Dooku", "Christopher Lee")
@@ -35,7 +35,8 @@ object DATA {
                 R.drawable.sw1_7,
                 R.drawable.sw1_8
             ),
-            icon = R.drawable.star_wars_1
+            icon = R.drawable.star_wars_1,
+            videos = listOf(R.raw.sw1_v1, R.raw.sw1_v2)
         ),
         Movie(
             id = "2",
@@ -55,7 +56,8 @@ object DATA {
                 R.drawable.sw2_8,
                 R.drawable.sw2_9
             ),
-            icon = R.drawable.star_wars_2
+            icon = R.drawable.star_wars_2,
+            videos = listOf(R.raw.sw2_v1, R.raw.sw2_v2, R.raw.sw2_v3)
         ),
         Movie(
             id = "3",
@@ -73,11 +75,17 @@ object DATA {
                 R.drawable.sw3_6,
                 R.drawable.sw3_7
             ),
-            icon = R.drawable.star_wars_3
+            icon = R.drawable.star_wars_3,
+            videos = listOf(R.raw.sw3_v1, R.raw.sw3_v2)
         )
     )
 }
 
 fun getMovie(id: String): Movie {
     return DATA.MOVIES.first { it.id == id }
+}
+
+fun getVideos(id: String, packageName: String): List<Uri> {
+    val movie = getMovie(id)
+    return movie.videos.map { Uri.parse("android.resource://${packageName}/${it}") }
 }

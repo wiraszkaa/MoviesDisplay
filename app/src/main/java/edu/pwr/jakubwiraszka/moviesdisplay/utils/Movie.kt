@@ -8,5 +8,6 @@ data class Movie(
     val release: String,
     val actors: List<Pair<String, String>>,
     val scenes: List<Int>,
-    val icon: Int
+    val icon: Int,
+    val videos: List<Int>
 )
